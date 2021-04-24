@@ -13,13 +13,11 @@ export default function AuthorForm() {
       ...prevState,
       [e.target.name]: e.target.value,
     }));
-    console.warn(author);
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
     addAuthor(author);
-    console.warn(author);
   };
 
   return (
