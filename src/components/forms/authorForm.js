@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import addAuthor from '../../helpers/data/AuthorData';
 
 export default function AuthorForm() {
   const [author, setAuthor] = useState({
@@ -12,40 +13,42 @@ export default function AuthorForm() {
       ...prevState,
       [e.target.name]: e.target.value,
     }));
+    console.warn(author);
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    setAuthor(author);
+    addAuthor(author);
+    console.warn(author);
   };
 
   return (
     <>
-      <div className="student-forms">
-        <form id="addStudentForm" autoComplete="off" onSubmit={handleSubmit}>
-          <h2>ADD AUTHOR</h2>
-          <label>email: </label>
+      <div className="author-forms">
+        <form id="addAuthorForm" autoComplete="off" onSubmit={handleSubmit}>
+          <h2>Add Author</h2>
+          <label></label>
           <input
             name="email"
             type="email"
             placeholder="Email"
-            value={author.email}
+            value={author.email.value}
             onChange={handleInputChange}
           ></input>
-          <label>Teacher: </label>
+          <label></label>
           <input
             name="first_name"
             type="text"
-            placeholder="Teacher"
-            value={author.first_name}
+            placeholder="First Name"
+            value={author.first_name.value}
             onChange={handleInputChange}
           ></input>
-          <label>Grade: </label>
+          <label></label>
           <input
               name="last_name"
               type="text"
-              placeholder="Teacher"
-              value={author.last_name}
+              placeholder="Last Name"
+              value={author.last_name.value}
               onChange={handleInputChange}
           ></input>
           <button type="submit">Submit</button>
