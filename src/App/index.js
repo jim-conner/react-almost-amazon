@@ -1,12 +1,7 @@
 import firebase from 'firebase';
 import React, { useEffect, useState } from 'react';
-import {
-  Button,
-  Card,
-  CardTitle,
-  CardText
-} from 'reactstrap';
 import AuthorForm from '../components/forms/authorForm';
+import AuthorCard from '../components/forms/AuthorCard';
 import firebaseConfig from '../helpers/data/apiKeys';
 import { getAuthors } from '../helpers/data/AuthorData';
 import './App.scss';
@@ -20,18 +15,19 @@ function App() {
     getAuthors().then((response) => setAuthors(response));
   }, []);
 
-  console.warn(authors);
-
   return (
   <div className='App'>
-    <AuthorForm formTitle='Author Form'/>
+    <AuthorForm
+    formTitle='Author Form'
+    setAuthors={setAuthors}
+    />
     <hr/>
     {authors.map((authorInfo) => (
-      <Card body key={authorInfo.firebaseKey}>
-          <CardTitle tag="h5">{authorInfo.first_name} {authorInfo.last_name}</CardTitle>
-          <CardText>{authorInfo.email}</CardText>
-          <Button>Button</Button>
-      </Card>
+      <AuthorCard body key={authorInfo.firebaseKey}
+          first_name={authorInfo.first_name}
+          last_name={authorInfo.last_name}
+          email={authorInfo.email}
+      />
     ))}
   </div>
   );
