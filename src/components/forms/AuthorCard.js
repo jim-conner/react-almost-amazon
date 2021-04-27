@@ -17,18 +17,23 @@ const AuthorCard = ({
   setAuthors
 }) => {
   const handleClick = () => {
+    // console.warn(firebaseKey);
+    // console.warn(setAuthors);
     deleteAuthor(firebaseKey)
-      .then((authorsArray) => setAuthors(authorsArray));
+      .then((authorArray) => setAuthors(authorArray));
   };
   return (
-    <div className="card-container">
-      <Card body key={firebaseKey}>
+      <Card body >
           <CardTitle tag="h5">{first_name} {last_name}</CardTitle>
           <CardText>{email}</CardText>
-          <Button color='danger' onClick={handleClick}>Delete Author</Button>
-          <Button color='info'>Edit Author</Button>
+          <Button color='danger'
+            onClick={handleClick}>Delete Author
+          </Button>
+          {/* <Button
+            color='info'
+            onClick={}>Edit Author
+          </Button> */}
       </Card>
-    </div>
   );
 };
 

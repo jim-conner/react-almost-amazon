@@ -29,7 +29,7 @@ const AuthorForm = ({ formTitle, setAuthors }) => {
       <Form id='addAuthorForm' autoComplete='off' onSubmit={handleSubmit}>
         <h2>{formTitle}</h2>
         <FormGroup>
-          <Label for="first_name">Grade:</Label>
+          <Label for="first_name"></Label>
           <Input
             name="first_name"
             type="text"
@@ -40,7 +40,7 @@ const AuthorForm = ({ formTitle, setAuthors }) => {
         </FormGroup>
 
         <FormGroup>
-          <Label for="last_name">Grade:</Label>
+          <Label for="last_name"></Label>
           <Input
             name="last_name"
             type="text"
@@ -51,7 +51,7 @@ const AuthorForm = ({ formTitle, setAuthors }) => {
         </FormGroup>
 
         <FormGroup>
-          <Label for="email">Name:</Label>
+          <Label for="email"></Label>
           <Input
             name="email"
             type="email"
