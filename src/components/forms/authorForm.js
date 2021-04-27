@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
-import addAuthor from '../../helpers/data/AuthorData';
+import PropTypes from 'prop-types';
+import { addAuthor } from '../../helpers/data/AuthorData';
 
-export default function AuthorForm() {
+const AuthorForm = () => {
   const [author, setAuthor] = useState({
     email: '',
     first_name: '',
@@ -13,13 +14,11 @@ export default function AuthorForm() {
       ...prevState,
       [e.target.name]: e.target.value,
     }));
-    console.warn(author);
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
     addAuthor(author);
-    console.warn(author);
   };
 
   return (
@@ -56,4 +55,10 @@ export default function AuthorForm() {
       </div>
     </>
   );
-}
+};
+
+AuthorForm.propTypes = {
+  formTitle: PropTypes.string.isRequired
+};
+
+export default AuthorForm;
