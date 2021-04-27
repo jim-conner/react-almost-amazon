@@ -1,3 +1,4 @@
+/* eslint-disable camelcase */
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import {
@@ -5,11 +6,19 @@ import {
 } from 'reactstrap';
 import { addAuthor } from '../../helpers/data/AuthorData';
 
-const AuthorForm = ({ formTitle, setAuthors }) => {
+const AuthorForm = ({
+  formTitle,
+  setAuthors,
+  firebaseKey,
+  first_name,
+  last_name,
+  email,
+}) => {
   const [author, setAuthor] = useState({
-    email: '',
-    first_name: '',
-    last_name: '',
+    email: email || '',
+    first_name: first_name || '',
+    last_name: last_name || '',
+    firebaseKey: firebaseKey || ''
   });
 
   const handleInputChange = (e) => {
@@ -69,7 +78,11 @@ const AuthorForm = ({ formTitle, setAuthors }) => {
 
 AuthorForm.propTypes = {
   formTitle: PropTypes.string.isRequired,
-  setAuthors: PropTypes.func
+  setAuthors: PropTypes.func,
+  firebaseKey: PropTypes.string,
+  first_name: PropTypes.string,
+  last_name: PropTypes.string,
+  email: PropTypes.string
 };
 
 export default AuthorForm;

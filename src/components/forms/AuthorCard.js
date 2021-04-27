@@ -1,5 +1,5 @@
 /* eslint-disable camelcase */
-import React from 'react';
+import React, { useState } from 'react';
 import {
   Button,
   Card,
@@ -8,6 +8,7 @@ import {
 } from 'reactstrap';
 import PropTypes from 'prop-types';
 import { deleteAuthor } from '../../helpers/data/AuthorData';
+import AuthorForm from './authorForm';
 
 const AuthorCard = ({
   firebaseKey,
@@ -16,23 +17,39 @@ const AuthorCard = ({
   email,
   setAuthors
 }) => {
-  const handleClick = () => {
-    // console.warn(firebaseKey);
-    // console.warn(setAuthors);
-    deleteAuthor(firebaseKey)
-      .then((authorArray) => setAuthors(authorArray));
+  const [editing, setEditing] = useState(false);
+  const handleClick = (type) => {
+    switch (type) {
+      case 'delete':
+        deleteAuthor(firebaseKey)
+          .then((authorArray) => setAuthors(authorArray));
+        break;
+      case 'edit':
+        setEditing((prevState) => !prevState);
+        break;
+      default: console.warn('nothing selected');
+        break;
+    }
   };
   return (
       <Card body >
           <CardTitle tag="h5">{first_name} {last_name}</CardTitle>
           <CardText>{email}</CardText>
-          <Button color='danger'
-            onClick={handleClick}>Delete Author
+          <Button color='info' onClick={() => handleClick('edit')}>
+            Edit Author
           </Button>
-          {/* <Button
-            color='info'
-            onClick={}>Edit Author
-          </Button> */}
+          <Button color='danger'onClick={() => handleClick('delete')}>
+            Delete Author
+          </Button>
+          {editing && <AuthorForm
+            formTitle='Edit Student'
+            setAuthors={setAuthors}
+            firebaseKey={firebaseKey}
+            first_name={first_name}
+            last_name={last_name}
+            email={email}
+
+            />}
       </Card>
   );
 };
