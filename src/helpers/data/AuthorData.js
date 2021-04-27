@@ -22,4 +22,10 @@ const addAuthor = (author) => new Promise((resolve, reject) => {
     .catch((error) => reject(error));
 });
 
-export { getAuthors, addAuthor };
+const deleteAuthor = () => new Promise((resolve, reject) => {
+  axios.delete(`${dbUrl}/authors.json`)
+    .then(() => getAuthors().then((authorsArray) => resolve(authorsArray)))
+    .catch((error) => reject(error));
+});
+
+export { getAuthors, addAuthor, deleteAuthor };

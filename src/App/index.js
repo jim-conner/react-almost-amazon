@@ -27,6 +27,7 @@ function App() {
           first_name={authorInfo.first_name}
           last_name={authorInfo.last_name}
           email={authorInfo.email}
+          setAuthors={setAuthors}
       />
     ))}
   </div>
