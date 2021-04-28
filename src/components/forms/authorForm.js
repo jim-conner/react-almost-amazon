@@ -1,12 +1,24 @@
+/* eslint-disable camelcase */
 import React, { useState } from 'react';
+import {
+  Button, Form, FormGroup, Label, Input
+} from 'reactstrap';
 import PropTypes from 'prop-types';
-import { addAuthor } from '../../helpers/data/AuthorData';
+import { addAuthor, updateStudent } from '../../helpers/data/AuthorData';
 
-const AuthorForm = () => {
+const AuthorForm = ({
+  formTitle,
+  setAuthors,
+  firebaseKey,
+  first_name,
+  last_name,
+  email,
+}) => {
   const [author, setAuthor] = useState({
-    email: '',
-    first_name: '',
-    last_name: '',
+    email: email || '',
+    first_name: first_name || '',
+    last_name: last_name || '',
+    firebaseKey: firebaseKey || ''
   });
 
   const handleInputChange = (e) => {
@@ -18,47 +30,71 @@ const AuthorForm = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    addAuthor(author);
+    if (author.firebaseKey) {
+      console.warn(firebaseKey);
+      updateStudent(author).then((authorArray) => setAuthors(authorArray));
+    } else {
+      addAuthor(author).then((authorArray) => setAuthors(authorArray));
+
+      setAuthor({
+        email: '',
+        first_name: '',
+        last_name: '',
+        firebaseKey: ''
+      });
+    }
   };
 
   return (
-    <>
-      <div className="author-forms">
-        <form id="addAuthorForm" autoComplete="off" onSubmit={handleSubmit}>
-          <h2>Add Author</h2>
-          <label></label>
-          <input
+    <div className='author-form'>
+      <Form id='addAuthorForm' autoComplete='off' onSubmit={handleSubmit}>
+        <h2>{formTitle}</h2>
+        <FormGroup>
+          <Label for="first_name"></Label>
+          <Input
+            name="first_name"
+            type="text"
+            placeholder="First Name"
+            value={author.first_name}
+            onChange={handleInputChange}
+          />
+        </FormGroup>
+
+        <FormGroup>
+          <Label for="last_name"></Label>
+          <Input
+            name="last_name"
+            type="text"
+            placeholder="Last Name"
+            value={author.last_name}
+            onChange={handleInputChange}
+          />
+        </FormGroup>
+
+        <FormGroup>
+          <Label for="email"></Label>
+          <Input
             name="email"
             type="email"
             placeholder="Email"
             value={author.email.value}
             onChange={handleInputChange}
-          ></input>
-          <label></label>
-          <input
-            name="first_name"
-            type="text"
-            placeholder="First Name"
-            value={author.first_name.value}
-            onChange={handleInputChange}
-          ></input>
-          <label></label>
-          <input
-              name="last_name"
-              type="text"
-              placeholder="Last Name"
-              value={author.last_name.value}
-              onChange={handleInputChange}
-          ></input>
-          <button type="submit">Submit</button>
-        </form>
-      </div>
-    </>
+          />
+        </FormGroup>
+
+        <Button type='submit'>Submit</Button>
+      </Form>
+    </div>
   );
 };
 
 AuthorForm.propTypes = {
-  formTitle: PropTypes.string.isRequired
+  formTitle: PropTypes.string.isRequired,
+  setAuthors: PropTypes.func,
+  firebaseKey: PropTypes.string,
+  first_name: PropTypes.string,
+  last_name: PropTypes.string,
+  email: PropTypes.string
 };
 
 export default AuthorForm;
