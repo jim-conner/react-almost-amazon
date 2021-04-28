@@ -4,7 +4,8 @@ import {
   Button,
   Card,
   CardTitle,
-  CardText
+  CardText,
+  CardBody
 } from 'reactstrap';
 import PropTypes from 'prop-types';
 import { deleteAuthor } from '../../helpers/data/AuthorData';
@@ -27,29 +28,31 @@ const AuthorCard = ({
       case 'edit':
         setEditing((prevState) => !prevState);
         break;
-      default: console.warn('nothing selected');
-        break;
+      default:
+        console.warn('nothing selected');
     }
   };
   return (
-      <Card body >
+      <Card>
+        <CardBody>
           <CardTitle tag="h5">{first_name} {last_name}</CardTitle>
           <CardText>{email}</CardText>
           <Button color='info' onClick={() => handleClick('edit')}>
-            Edit Author
+              {editing ? 'Close Form' : 'Edit Author' }
           </Button>
           <Button color='danger'onClick={() => handleClick('delete')}>
             Delete Author
           </Button>
-          {editing && <AuthorForm
-            formTitle='Edit Student'
-            setAuthors={setAuthors}
-            firebaseKey={firebaseKey}
-            first_name={first_name}
-            last_name={last_name}
-            email={email}
-
+          {
+            editing && <AuthorForm
+              formTitle='Edit Author'
+              setAuthors={setAuthors}
+              firebaseKey={firebaseKey}
+              first_name={first_name}
+              last_name={last_name}
+              email={email}
             />}
+        </CardBody>
       </Card>
   );
 };

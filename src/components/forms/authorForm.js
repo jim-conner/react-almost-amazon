@@ -1,10 +1,10 @@
 /* eslint-disable camelcase */
 import React, { useState } from 'react';
-import PropTypes from 'prop-types';
 import {
   Button, Form, FormGroup, Label, Input
 } from 'reactstrap';
-import { addAuthor } from '../../helpers/data/AuthorData';
+import PropTypes from 'prop-types';
+import { addAuthor, updateStudent } from '../../helpers/data/AuthorData';
 
 const AuthorForm = ({
   formTitle,
@@ -30,7 +30,19 @@ const AuthorForm = ({
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    addAuthor(author).then((authorArray) => setAuthors(authorArray));
+    if (author.firebaseKey) {
+      console.warn(firebaseKey);
+      updateStudent(author).then((authorArray) => setAuthors(authorArray));
+    } else {
+      addAuthor(author).then((authorArray) => setAuthors(authorArray));
+
+      setAuthor({
+        email: '',
+        first_name: '',
+        last_name: '',
+        firebaseKey: ''
+      });
+    }
   };
 
   return (
@@ -43,7 +55,7 @@ const AuthorForm = ({
             name="first_name"
             type="text"
             placeholder="First Name"
-            value={author.first_name.value}
+            value={author.first_name}
             onChange={handleInputChange}
           />
         </FormGroup>
@@ -54,7 +66,7 @@ const AuthorForm = ({
             name="last_name"
             type="text"
             placeholder="Last Name"
-            value={author.last_name.value}
+            value={author.last_name}
             onChange={handleInputChange}
           />
         </FormGroup>

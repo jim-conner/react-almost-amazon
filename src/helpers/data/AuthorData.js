@@ -25,4 +25,12 @@ const deleteAuthor = (firebaseKey) => new Promise((resolve, reject) => {
     .catch((error) => reject(error));
 });
 
-export { getAuthors, addAuthor, deleteAuthor };
+const updateStudent = (author) => new Promise((resolve, reject) => {
+  axios.patch(`${dbUrl}/authors/${author.firebaseKey}.json`, author)
+    .then(() => getAuthors().then(resolve))
+    .catch((error) => reject(error));
+});
+
+export {
+  getAuthors, addAuthor, deleteAuthor, updateStudent
+};

@@ -14,7 +14,7 @@ function App() {
   return (
     <>
     <AuthorForm
-    formTitle='Author Form'
+    formTitle='Add Author'
     setAuthors={setAuthors}
     />
     <hr/>
