@@ -1,11 +1,10 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
+import PropTypes from 'prop-types';
 import AuthorForm from '../components/forms/authorForm';
 import AuthorCard from '../components/forms/AuthorCard';
-import { getAuthors } from '../helpers/data/AuthorData';
-// import './App.scss';
+// import { getAuthors } from '../helpers/data/AuthorData';
 
-function Authors() {
-
+function Authors(authors, setAuthors) {
   return (
     <>
     <AuthorForm
@@ -28,5 +27,10 @@ function Authors() {
   </>
   );
 }
+
+Authors.propTypes = {
+  authors: PropTypes.array.isRequired,
+  setAuthors: PropTypes.func.isRequired
+};
 
 export default Authors;

@@ -3,6 +3,7 @@ import { BrowserRouter as Router } from 'react-router-dom';
 import NavBar from '../components/NavBar';
 import { getAuthors } from '../helpers/data/AuthorData';
 import Routes from '../helpers/Routes';
+import './App.scss';
 
 function App() {
   const [authors, setAuthors] = useState([]);
