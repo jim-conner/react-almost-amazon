@@ -31,7 +31,6 @@ const AuthorForm = ({
   const handleSubmit = (e) => {
     e.preventDefault();
     if (author.firebaseKey) {
-      console.warn(firebaseKey);
       updateStudent(author).then((authorArray) => setAuthors(authorArray));
     } else {
       addAuthor(author).then((authorArray) => setAuthors(authorArray));
@@ -77,7 +76,7 @@ const AuthorForm = ({
             name="email"
             type="email"
             placeholder="Email"
-            value={author.email.value}
+            value={author.email}
             onChange={handleInputChange}
           />
         </FormGroup>

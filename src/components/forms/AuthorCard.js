@@ -36,7 +36,7 @@ const AuthorCard = ({
       <Card>
         <CardBody>
           <CardTitle tag="h5">{first_name} {last_name}</CardTitle>
-          <CardText>{email}</CardText>
+          <CardText>Email: {email}</CardText>
           <Button color='info' onClick={() => handleClick('edit')}>
               {editing ? 'Close Form' : 'Edit Author' }
           </Button>
