@@ -1,17 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import AuthorForm from '../components/forms/authorForm';
 import AuthorCard from '../components/forms/AuthorCard';
-// import { getAuthors } from '../helpers/data/AuthorData';
 
-function Authors(authors, setAuthors) {
+function Authors({ authors, setAuthors }) {
   return (
     <>
-    <AuthorForm
-    formTitle='Add Author'
-    setAuthors={setAuthors}
-    />
-    <hr/>
     <div className="card-container">
       {authors.map((authorInfo) => (
         <AuthorCard

@@ -1,8 +1,9 @@
 import React from 'react';
 import { Route, Switch } from 'react-router-dom';
 import PropTypes from 'prop-types';
-import Authors from './data/AuthorData';
 import Home from '../views/Home';
+import AddAuthor from '../views/AddAuthor';
+import Authors from '../views/Authors';
 
 export default function Routes({ authors, setAuthors }) {
   return (
@@ -10,9 +11,9 @@ export default function Routes({ authors, setAuthors }) {
       <Switch>
         <Route exact path ='/' component={Home} />
         <Route path ='/authors' component={() => <Authors
-          students={authors} setStudents={setAuthors} />}
+          authors={authors} setStudents={setAuthors} />}
         />
-        {/* <Route path ='/add-author' component={addAuthor} /> */}
+        <Route path ='/add-author' component={() => <AddAuthor setAuthors={setAuthors} />}/>
       </Switch>
     </div>
   );
