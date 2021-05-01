@@ -1,36 +1,26 @@
 import React, { useEffect, useState } from 'react';
-import AuthorForm from '../components/forms/authorForm';
-import AuthorCard from '../components/forms/AuthorCard';
+import { BrowserRouter as Router } from 'react-router-dom';
+import NavBar from '../components/NavBar';
 import { getAuthors } from '../helpers/data/AuthorData';
+import Routes from '../helpers/Routes';
 import './App.scss';
 
 function App() {
   const [authors, setAuthors] = useState([]);
 
   useEffect(() => {
-    getAuthors().then((response) => setAuthors(response));
+    getAuthors().then(setAuthors);
   }, []);
-
   return (
     <>
-    <AuthorForm
-    formTitle='Add Author'
-    setAuthors={setAuthors}
-    />
-    <hr/>
-    <div className="card-container">
-      {authors.map((authorInfo) => (
-        <AuthorCard
-            key={authorInfo.firebaseKey}
-            firebaseKey={authorInfo.firebaseKey}
-            first_name={authorInfo.first_name}
-            last_name={authorInfo.last_name}
-            email={authorInfo.email}
-            setAuthors={setAuthors}
-        />
-      ))}
-    </div>
-  </>
+    <Router>
+      <NavBar/>
+      <Routes
+        authors={authors}
+        setAuthors={setAuthors}
+      />
+    </Router>
+    </>
   );
 }
 
