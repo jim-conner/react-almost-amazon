@@ -23,7 +23,7 @@ function Authors({ authors, setAuthors }) {
 
 Authors.propTypes = {
   authors: PropTypes.array.isRequired,
-  setAuthors: PropTypes.func.isRequired
+  setAuthors: PropTypes.func
 };
 
 export default Authors;
