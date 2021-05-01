@@ -1,11 +1,12 @@
 /* eslint-disable camelcase */
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 import {
   Button,
   Card,
   CardTitle,
   CardText,
-  CardBody
+  CardBody,
 } from 'reactstrap';
 import PropTypes from 'prop-types';
 import { deleteAuthor } from '../../helpers/data/AuthorData';
@@ -43,6 +44,7 @@ const AuthorCard = ({
           <Button color='danger'onClick={() => handleClick('delete')}>
             Delete Author
           </Button>
+          <Link to='add-author'>Go to Add Student</Link>
           {
             editing && <AuthorForm
               formTitle='Edit Author'
