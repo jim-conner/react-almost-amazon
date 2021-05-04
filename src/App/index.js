@@ -34,7 +34,7 @@ function App() {
   return (
     <>
     <Router>
-      <NavBar use={user}/>
+      <NavBar user={user}/>
       <Routes
         authors={authors}
         setAuthors={setAuthors}
